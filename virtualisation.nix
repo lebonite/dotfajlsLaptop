@@ -33,7 +33,10 @@
        };
     };
   
-    docker.enable = true; 
+    docker = {
+      #enable = true;
+      enableOnBoot = false;
+    }; 
     spiceUSBRedirection.enable = true;
   };
 

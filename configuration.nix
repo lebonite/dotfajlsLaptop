@@ -40,8 +40,10 @@
   # Fonts
   
   fonts.packages = with pkgs; [
-    noto-fonts
-    nerdfonts
+  noto-fonts         
+  nerd-fonts._0xproto
+  nerd-fonts.droid-sans-mono
+   
   ];
   # Enable the X11 windowing system.
   # services.xserver.enable = true;
@@ -59,16 +61,16 @@
     enable = true;
     pulse.enable = true;
   };
-
+  programs.wireshark.enable = true;
   # Enable touchpad support (enabled default in most desktopManager).
   services.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.Hedwig = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "docker" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" "docker" "wireshark" ]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [
-      
+      wine     
     ];
   };
   users.users.Guest = {
@@ -87,7 +89,9 @@
     wget
     libimobiledevice
     ifuse
-   
+   # inputs.astal.packages.${system}.default
+   # inputs.astal.packages.${system}.battery
+    inputs.ags.packages.${system}.default 
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -101,7 +105,7 @@
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
+  services.openssh.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
@@ -109,10 +113,7 @@
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
   # Bridge
-  boot.kernel.sysctl = {
-    "net.ipv4.conf.all.forwarding" = true;
-    "net.ipv6.conf.all.forwarding" = true;
-  };
+
 
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you

@@ -23,11 +23,28 @@
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
+      # Kommunikation
       discord 
+      teams-for-linux
+      
+      # Browsers
       librewolf
-      lutris  
+  
+      # Games
+      lutris
+   
+      # Ljud 
+      easyeffects
+      pavucontrol
+      
+      #Network tools
+      wireshark 
+    
+      # AGS / ASTAL
+      upower
 
-
+      # Office stuff
+      kdePackages.okular
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
@@ -46,26 +63,37 @@
 
 
   # Enable certain unfree software                               
-    nixpkgs.config.allowUnfreePredicate = pkg:
-     builtins.elem (lib.getName pkg) [
-      # Add additional package names here
-      "discord"
-      "steam"
-      "steam-original"
-    ];
+   # nixpkgs.config.allowUnfreePredicate = pkg:
+    # builtins.elem (lib.getName pkg) [
+    #  # Add additional package names here
+    #  "discord"
+    #  "steam"
+    #  "steam-original"
+    #];
 
 
   # Hyprland
     programs.wofi.enable = true;
-    programs.kitty.enable = true;
+    programs.kitty = {
+      enable = true;
+      themeFile = "Catppuccin-Frappe";
+
+    };
     wayland.windowManager.hyprland.enable = true;
- 
+  # GTK theme
+    gtk = {
+      enable = true;
+      iconTheme = {
+        name = "xfce4-icon-theme";
+        package = pkgs.xfce.xfce4-icon-theme;
+      };
+    }; 
   # Hyprland settings
 
     wayland.windowManager.hyprland.settings = {
- 
-   # monitor = "DP-1, 3440x1440@144,0x0,1";
-   # monitor = "DP-2, 1280x960@90,3440x0,1";   
+     
+   
+    monitor = "eDP-1, 1920x1080@60, 0x0, 1.0";
     
     input = { 
         kb_layout = "se";
@@ -138,6 +166,8 @@
        
        
      };
+     
+     windowrule = "opacity 1.0 override 0.5 override 0.8 override, kitty";
   }; 
 
 
