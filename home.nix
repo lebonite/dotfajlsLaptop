@@ -5,6 +5,7 @@
   imports = 
     [
       ./git.nix
+      ./hyprland/.
     ];
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
@@ -41,8 +42,6 @@
       wireshark 
     
       # AGS / ASTAL
-      upower
-
       # Office stuff
       kdePackages.okular
 
@@ -60,7 +59,7 @@
     # '')
   ];
 
-
+  
 
   # Enable certain unfree software                               
    # nixpkgs.config.allowUnfreePredicate = pkg:
@@ -84,14 +83,15 @@
     gtk = {
       enable = true;
       iconTheme = {
-        name = "xfce4-icon-theme";
-        package = pkgs.xfce.xfce4-icon-theme;
+        name = "Adwaita";
+        package = pkgs.adwaita-icon-theme;
       };
     }; 
   # Hyprland settings
 
     wayland.windowManager.hyprland.settings = {
-     
+    "$rosewater" = "rgb(f2d5cf)";
+    "$rosewaterAlpha" = "f2d5cf";  
    
     monitor = "eDP-1, 1920x1080@60, 0x0, 1.0";
     
@@ -99,6 +99,7 @@
         kb_layout = "se";
     };
     
+    exec-once = "[workspace 10 silent; float; move 0 0] kitty ./.dotfiles/ags/result/bin/ags-shell";
     "$mod" = "SUPER";
     bind = 
       [
@@ -123,6 +124,7 @@
         "$mod, 8 , workspace, 8"
         "$mod, 9 , workspace, 9"
         "$mod, 10 , workspace, 10"
+        "$mod, 0, workspace, 0"
         
         # Move active window to a workspace with mainMod + SHIFT + [0-9]
         "bind = $mod SHIFT, 1, movetoworkspace, 1"
@@ -149,13 +151,12 @@
       ];  
       
 
-
+    
     general = { 
+       "col.active_border" = "$rosewater";
        gaps_in = 5;
        gaps_out = 5;
        env = "WLR_DRM_NO_ATOMIC,1"; 
-
-
        allow_tearing = true;
     }; 
 
@@ -167,7 +168,7 @@
        
      };
      
-     windowrule = "opacity 1.0 override 0.5 override 0.8 override, kitty";
+     windowrule = "opacity 1.0 override 0.5 override 0.8 override, class:kitty";
   }; 
 
 

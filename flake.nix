@@ -43,30 +43,53 @@
           ];
         };
  
-      packages.${system}. default = pkgs.stdenvNoCC.mkDerivation rec {
-        name = "my-shell";
-        src = ./.;
-         nativeBuildInputs = [
-           ags.packages.${system}.default
-           pkgs.wrapGAppsHook
-           pkgs.gobject-introspection
-         ];
+    packages.${system}.default = pkgs.stdenv.mkDerivation {
+      pname = "marble";
+      src = ./marble;
+      dontUnpack = true;
 
-        buildInputs = with astal.packages.${system}; [
-          astal4
+      nativeBuildInputs = with pkgs; [
+        wrapGAppsHook
+        gobject-introspection
+      ];
+
+      buildInputs =
+        (with astal.packages.${system}; [
+          astal3
           io
-          battery 
-          # any other package
-        ];
-        installPhase = ''
-          mkdir -p $out/bin
-          ags bundle app.ts $out/bin/${name}
-        '';
+          apps
+          battery
+          bluetooth
+          hyprland
+          mpris
+          network
+          notifd
+          powerprofiles
+          tray
+          wireplumber
+        ])
+        ++ (with pkgs; [
+          gjs
+        ]);
 
+      preFixup = ''
+        gappsWrapperArgs+=(
+          --prefix PATH : ${with pkgs;
+          lib.makeBinPath [
+            dart-sass
+            fzf
+          ]}
+        )
+      '';
+
+      installPhase = ''
+        mkdir -p $out/bin
+        install $src $out/bin/marble
+      '';
+    };
    
     
 
-};       
    }; 
 
 
