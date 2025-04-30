@@ -1,4 +1,4 @@
-{ pkgs, config, ...}:
+{ pkgs, config, lib, ...}:
 # all my virtualisation needs are declared here, like qemu/kvm and docker
 
 { 
@@ -39,6 +39,8 @@
     }; 
     spiceUSBRedirection.enable = true;
   };
+
+
 
   # Enable ISC DHCP Server
 #  services.dhcpd = {
