@@ -104,7 +104,6 @@
     "$mod" = "SUPER";
     bind = 
       [
-        "$mod, F, exec, librewolf"
         "$mod, X, exec, kitty"
 
         "$mod, Q, killactive"
@@ -115,6 +114,7 @@
 	"bind = $mod, R, exec, $menu"
 	"bind = $mod, P, pseudo" # dwindle
 	"bind = $mod, J, togglesplit" # dwindle
+        "bind = $mod, F, fullscreen"
         "$mod, 1 , workspace, 1"
         "$mod, 2 , workspace, 2"
         "$mod, 3 , workspace, 3"

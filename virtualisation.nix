@@ -34,7 +34,7 @@
     };
   
     docker = {
-      #enable = true;
+      enable = true;
       enableOnBoot = false;
     }; 
     spiceUSBRedirection.enable = true;
