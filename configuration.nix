@@ -12,7 +12,7 @@
     ];
 
   # Efi bootloader mount pooint
-  boot.loader.efi.efiSysMountPoint = "/booty/"; 
+  boot.loader.efi.efiSysMountPoint = "/boot/"; 
  
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
